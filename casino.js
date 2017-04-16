@@ -108,6 +108,21 @@ function hasEnoughMoney()
 
 
 /**
+ * Permet d'afficher la modal LASTCHANCE
+ */
+function openLASTCHANCE()
+{
+    console.log('On ouvre la modal !');
+    $('#LASTCHANCE').modal('toggle');
+    /**
+     * 
+            console.log('Mais on est sympas donc on vous fait cadeau de +20 credits !');
+            initCredit();
+     */
+}
+
+
+/**
  * *****************************************************************************
  * Début du programme (en haut ce sont les fonctions)
  * *****************************************************************************
@@ -136,8 +151,7 @@ $(document).ready( function ()
             console.log('pas assez de crédits !');
             // afficher ici un message d'erreur
             // mais pour le moment on se contente de réinitialiser le nombre de crédits
-            console.log('Mais on est sympas donc on vous fait cadeau de +20 credits !');
-            initCredit();
+            openLASTCHANCE();
         }
         console.log('Vous avez ' + Credit + ' credits');
     });

@@ -4,4 +4,35 @@ img {
 }
 
 .cartes {
-  display: flex;}
+    display: flex;
+    /** on centre les symboles **/
+    justify-content: center;
+}
+
+body {
+    /** à cause de la navbar fixe **/
+    padding-top: 70px;
+
+    /** bug horizontal de la barre de défilement;(  **/
+    overflow-x: hidden;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #f5f5f5;
+}
+
+.container .text-muted {
+    margin: 20px 0;
+}
+.text-muted {
+    color: #777;
+}
+
+.footer-right {
+    float: right;
+    margin-right: 20px;
+}
