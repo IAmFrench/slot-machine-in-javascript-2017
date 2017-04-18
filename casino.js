@@ -62,6 +62,7 @@ class slotMachine {
             return null;
         }
 
+      
         // on regarde ne ne sais pas quoi ;( !
         if (One !== undefined && Two !== undefined && Three !== undefined && Four !== undefined) {
             $('.result').html(One);
@@ -77,6 +78,7 @@ class slotMachine {
         // et enfin on affiche 'you win'
         return $('.result').html('YOU WIN');
     }
+
 
     /**
      * Permet de vérifier si l'utilisateur a assez de sous ( sup à 0)
@@ -118,8 +120,7 @@ class slotMachine {
  *
  * dans une fonction séparée pour pouvoir reset lse crédits depuis le navigateur
  */
-function initCredit()
-{
+function initCredit() {
     Cookies.set('Credit', '20', { expires: 7, path: '' });
     location.reload(true);
     return 'Vous avez maintenant ' + Cookies.get('Credit') + ' credits!';
@@ -131,9 +132,9 @@ function initCredit()
  * Permet de detecter si le Credit existe au début de la partie
  * et si nécéssaire initialiser le Credit
  */
-function detectCredit()
-{
+function detectCredit() {
     // on regarde s'il faut définir le Credit en cookie
+
     var credit = Cookies.get('Credit');
     console.log(Cookies.get('Credit'));
 
@@ -143,6 +144,7 @@ function detectCredit()
         credit = 20;//getCredit();
         initCredit();
     }
+
     // sinon c'est que c'est bon
     return credit;
 }
@@ -151,8 +153,7 @@ function detectCredit()
 /**
  * Permet d'afficher la modal LASTCHANCE
  */
-function openLASTCHANCE()
-{
+function openLASTCHANCE() {
     console.log('On ouvre la modal !');
     // on définis les propriétés de notre modal
     $('#LASTCHANCE').modal({
@@ -161,6 +162,22 @@ function openLASTCHANCE()
     }); // on ouvre la modal
 }
 
+function startAnimation() {
+    var compteurDeTours;
+    var nb = 0;
+
+    for (compteurDeTours = 0; compteurDeTours < 3; compteurDeTours++) {
+
+
+        var nb = nb + 360;
+        var rota = nb + 'deg';
+        runSlots();
+        $('.x').transition({
+            perspective: '100px',
+            rotateX: rota
+        });
+        }
+}
 
 /**
  * *****************************************************************************
@@ -176,14 +193,17 @@ console.log('Vous avez ' + machine.credits + ' credit(s) !');
 /**
  * On écoute le clic sur le bouton
  */
-$(document).ready( function ()
-{
-    $('button').click( function ()
-    {
+$(document).ready(function () {
+    $('button').click(function () {
         // l'utilisateur peut-il lancer le machine ? (assez de crédits ?)
         if (machine.hasEnoughMoney()) {
             machine.run();
             $('span.score').text(machine.credits);
+            $('#start').prop('disabled', true)
+            setTimeout(_ => $('#start').prop('disabled', false), 1000);
+            console.log('Partie lancée : -1 crédit');
+            setNewCredit(Credit - 1);
+            startAnimation();
         } else {
             console.log('pas assez de crédits !');
             // afficher ici un message d'erreur
