@@ -14,10 +14,10 @@ function runSlots() {
         "https://upload.wikimedia.org/wikipedia/commons/a/a0/Naipe_copas.png",
         "https://upload.wikimedia.org/wikipedia/commons/5/5c/Naipe_espadas.png",
         "https://upload.wikimedia.org/wikipedia/commons/8/8a/SuitClubs.svg"
-        ];
-    
+    ];
+
     //https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Math/random//
-    
+
     One = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
     Two = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
     Three = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
@@ -27,7 +27,7 @@ function runSlots() {
     $($('.x')[1]).html('<img src = "' + images[Two - 1] + '">');
     $($('.x')[2]).html('<img src = "' + images[Three - 1] + '">');
     $($('.x')[3]).html('<img src = "' + images[Four - 1] + '">');
-    if (One !== Two || Two !== Three || Three!== Four) {
+    if (One !== Two || Two !== Three || Three !== Four) {
         console.log('Perdu !')
         return null;
     }
@@ -47,8 +47,7 @@ function runSlots() {
 /**
  * Permet de sauvegarder le Credit en "cookie"
  */
-function setNewCredit(value)
-{
+function setNewCredit(value) {
     Cookies.set('Credit', value, { expires: 7, path: '' });
     getCredit();
 
@@ -58,8 +57,7 @@ function setNewCredit(value)
 /**
  * Permet d'obtenir le Credit de l'utilisateur depuis les cookies
  */
-function getCredit()
-{
+function getCredit() {
     Credit = Number(Cookies.get('Credit'));
     return Credit; // on retourne un chiffre
 }
@@ -69,8 +67,7 @@ function getCredit()
  * Permet de définir le Credit attribué à chaque début de partie
  * par défaut 20 crédits
  */
-function initCredit()
-{
+function initCredit() {
     Cookies.set('Credit', '20', { expires: 7, path: '' });
     getCredit();
 }
@@ -80,10 +77,9 @@ function initCredit()
  * Permet de detecter si le Credit existe au début de la partie
  * et si nécéssaire initialiser le Credit
  */
-function detectCredit()
-{
+function detectCredit() {
     // on regarde s'il faut définir le Credit en cookie
-    if (typeof(Cookies.get('Credit')) == 'undefined') {
+    if (typeof (Cookies.get('Credit')) == 'undefined') {
         console.log('Cookie vide ou malformé !', Cookies.get('Credit'));
         // on initialise donc le cookie
         initCredit();
@@ -96,9 +92,8 @@ function detectCredit()
 /**
  * Permet de vérifier si l'utilisateur a assez de sous ( sup à 0)
  */
-function hasEnoughMoney()
-{
-    if(getCredit() <= 0) {
+function hasEnoughMoney() {
+    if (getCredit() <= 0) {
         // ben pas assez de sous-sous
         return false;
     } else {
@@ -110,8 +105,7 @@ function hasEnoughMoney()
 /**
  * Permet d'afficher la modal LASTCHANCE
  */
-function openLASTCHANCE()
-{
+function openLASTCHANCE() {
     console.log('On ouvre la modal !');
     $('#LASTCHANCE').modal('toggle');
     /**
@@ -121,6 +115,22 @@ function openLASTCHANCE()
      */
 }
 
+function startAnimation() {
+    var compteurDeTours;
+    var nb = 0;
+
+    for (compteurDeTours = 0; compteurDeTours < 3; compteurDeTours++) {
+
+
+        var nb = nb + 360;
+        var rota = nb + 'deg';
+        runSlots();
+        $('.x').transition({
+            perspective: '100px',
+            rotateX: rota
+        });
+        }
+}
 
 /**
  * *****************************************************************************
@@ -137,16 +147,17 @@ console.log('Vous avez ' + Credit + ' credit(s) !');
 /**
  * On écoute le clic sur le bouton
  */
-$(document).ready( function ()
-{
-    $('button').click( function ()
-    {
+$(document).ready(function () {
+    $('button').click(function () {
         // l'utilisateur peut-il lancer le machine ? (assez de crédits ?)
         if (hasEnoughMoney()) {
             // oui, alors on retire 1 crédit
-            console.log('Partie lancée: -1 crédit');
+            $('#start').prop('disabled', true)
+            setTimeout(_ => $('#start').prop('disabled', false), 1000);
+            console.log('Partie lancée : -1 crédit');
             setNewCredit(Credit - 1);
-            runSlots();
+            startAnimation();
+
         } else {
             console.log('pas assez de crédits !');
             // afficher ici un message d'erreur
