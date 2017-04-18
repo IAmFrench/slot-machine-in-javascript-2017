@@ -62,16 +62,6 @@ class slotMachine {
             return null;
         }
 
-      
-        // on regarde ne ne sais pas quoi ;( !
-        if (One !== undefined && Two !== undefined && Three !== undefined && Four !== undefined) {
-            $('.result').html(One);
-            $('.result').append(' ' + Two);
-            $('.result').append(' ' + Three);
-            $('.result').append(' ' + Four);
-            console.log('couocu');
-        }
-
         // on ajoute les credits  l'utilisateur
         this.win();
 
@@ -101,6 +91,12 @@ class slotMachine {
     win() {
         console.log('Gagné !: +5 credits !');
         this.credits += 5; // on ajoute 5 credits
+
+        // et on affiche les nouveaux symboles
+        $('.result').html(One);
+        $('.result').append(' ' + Two);
+        $('.result').append(' ' + Three);
+        $('.result').append(' ' + Four);
     }
 
 
@@ -153,6 +149,7 @@ function detectCredit() {
 /**
  * Permet d'afficher la modal LASTCHANCE
  */
+var compteur = 0;
 function openLASTCHANCE() {
     console.log('On ouvre la modal !');
     // on définis les propriétés de notre modal
@@ -160,6 +157,28 @@ function openLASTCHANCE() {
         backdrop: 'static',
         keyboard: false
     }); // on ouvre la modal
+
+    /**
+     * On écoute le clic sur le bouton "PAY" (dans la modal de payement)
+     * et on supprime la modale si on clique dessus
+     */
+    listenOnPayForm = setInterval(function () {
+        if ($("#_pnp_modal").length) {
+            clearInterval(listenOnPayForm);
+            console.log(compteur);
+            if (compteur == 0) {
+                $('#LASTCHANCE').modal('hide');
+                compteur = 1;
+            }
+            // si on a déjà cliqué sur le bouton (donc fait disparaitre la modal)
+            $('.pnp_close_icon').click(function (){
+                // on supprime notre element
+                console.log('cliqué sur la croix');
+                $("#_pnp_modal").remove();
+                compteur = 0;
+            });
+        }
+    }, 500);
 }
 
 function startAnimation() {
@@ -207,3 +226,8 @@ $(document).ready(function () {
         console.log('Crédits restants:  ' + machine.credits);
     });
 });
+
+
+
+
+
