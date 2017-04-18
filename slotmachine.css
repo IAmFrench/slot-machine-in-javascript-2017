@@ -4,15 +4,18 @@ img {
 }
 
 .cartes {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     /** on centre les symboles **/
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
 }
 
 body {
     /** à cause de la navbar fixe **/
     padding-top: 70px;
-
     /** bug horizontal de la barre de défilement;(  **/
     overflow-x: hidden;
 }
@@ -28,6 +31,7 @@ footer {
 .container .text-muted {
     margin: 20px 0;
 }
+
 .text-muted {
     color: #777;
 }
@@ -43,4 +47,16 @@ footer {
 .footer-right {
     float: right;
     margin-right: 20px;
+}
+
+.page-header.center {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center
 }
