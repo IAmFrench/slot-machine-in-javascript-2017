@@ -32,6 +32,14 @@ footer {
     color: #777;
 }
 
+.panel-heading span {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 8px;
+    margin-right: 25px;
+}
+
 .footer-right {
     float: right;
     margin-right: 20px;
