@@ -1,131 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <title>Projet Javascript 2017 | Machine à sous</title>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" integrity="sha256-j+P6EZJVrbXgwSR5Mx+eCS6FvP9Wq27MBRC/ogVriY0=" crossorigin="anonymous" />
     <link rel="stylesheet" href="slotmachine.css">
 </head>
+
 <body>
-
-
-<!-- NAVBAR -->
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <!-- nav-de-gauche -->
-    <p class="navbar-text"></p>
-    <!-- nav-de-droite -->
-    <p class="navbar-text navbar-right">
-        <i class="fa fa-external-link" aria-hidden="true"></i>
-        <a href="https://github.com/IAmFrench/projet_javascript_2017_machine_a_sous" class="navbar-link">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- nav-de-gauche -->
+            <p class="navbar-text"></p>
+            <!-- nav-de-droite -->
+            <p class="navbar-text navbar-right"> <i class="fa fa-external-link" aria-hidden="true"></i> <a href="https://github.com/IAmFrench/projet_javascript_2017_machine_a_sous" class="navbar-link">
         View project on 
         <i class="fa fa-github" aria-hidden="true"></i>
          Github
-        </a>
-    </p>
-  </div>
-</nav>
-<!-- FIN NAV BAR -->
-
-
-<!-- HEADER PRINCIPAL -->
-<div class="container">
-    <div class="page-header center">
-        <h1>Slot machine</h1>
-    </div>
-</div>
-<!-- FIN HEADER -->
-
-
-<!-- SLOT MACHINE -->
-<div class="row">
+        </a> </p>
+        </div>
+    </nav>
+    <!-- FIN NAV BAR -->
+    <!-- HEADER PRINCIPAL -->
     <div class="container">
-        <div class="col-xs-12 col-md-10 col-lg-8 col-xs-offset-0 col-md-offset-1 col-lg-offset-2">
-            <div class="panel panel-default text-center">
-                <div class="panel-heading">
-                    <h3 class="panel-title">My slot machine</h3>
-                    <span class="score">Credits</span>
-                </div>
-                <div class="panel-body">
-                    Here is the magic ;) <!-- Nah I'm joking ;) -->
-                    <div class='cartes'>
-                        <div class='x'></div>
-                        <div class='x'></div>
-                        <div class='x'></div>
-                        <div class="x"></div>
+        <div class="page-header center"> <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Naipe_espadas.png" alt=""><img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Naipe_ouros.png" alt="">
+            <h1 class="animated infinite flash" style="font-family: 'Oswald', sans-serif;margin:0;padding-right:7px;">CASINO</h1> <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/SuitClubs.svg" alt=""><img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Naipe_copas.png" alt=""></div>
+    </div>
+    <!-- FIN HEADER -->
+    <!-- SLOT MACHINE -->
+    <div class="row">
+        <div class="container">
+            <div class="col-xs-12 col-md-10 col-lg-8 col-xs-offset-0 col-md-offset-1 col-lg-offset-2">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Our slot machine</h3> <span class="score">Credits</span> </div>
+                    <div class="panel-body"> Here is the magic ;)
+                        <!-- Nah I'm joking ;) -->
+                        <div class='cartes'>
+                            <div class='x'></div>
+                            <div class='x'></div>
+                            <div class='x'></div>
+                            <div class="x"></div>
+                        </div> <span class='result'></span> </div>
+                    <div class="panel-footer">
+                        <button id="start" type="button" class="btn btn-primary btn-lg"> <i class="fa fa-usd" aria-hidden="true"></i> <i class="fa fa-usd" aria-hidden="true"></i> <i class="fa fa-usd" aria-hidden="true"></i> MAKE ME RICH <i class="fa fa-usd" aria-hidden="true"></i> <i class="fa fa-usd" aria-hidden="true"></i> <i class="fa fa-usd" aria-hidden="true"></i> </button>
                     </div>
-                    <span class='result'></span>
                 </div>
-                <div class="panel-footer">
-                    <button id="start" type="button" class="btn btn-primary btn-lg">
-                        <i class="fa fa-usd" aria-hidden="true"></i>
-                        <i class="fa fa-usd" aria-hidden="true"></i>
-                        <i class="fa fa-usd" aria-hidden="true"></i>
-                         MAKE ME RICH
-                        <i class="fa fa-usd" aria-hidden="true"></i>
-                        <i class="fa fa-usd" aria-hidden="true"></i>
-                        <i class="fa fa-usd" aria-hidden="true"></i>
-                        </button>
-                </div>
-            </div>            
-        </div>
-    </div>
-</div>
-<!-- FIN SLOT MACHINE -->
-
-
-
-<!-- MODAL LASTCHANCE -->
-<div class="modal fade" id="LASTCHANCE" tabindex="-1" role="dialog" aria-labelledby="getCredits">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <div><a id="plugnpaid-op-l"></a></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" disabled data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" disabled >Save changes</button>
             </div>
         </div>
     </div>
-</div>
-<!-- FIN MODAL LAST CHANCE -->
-
-
-<!-- FOOTER -->
-<footer class="footer">
-    <div class="container">
-        <p class="text-muted">Made with <i class="fa fa-heart"></i>
-            <small>by 
-            <a href="https://github.com/IAmFrench/projet_javascript_2017_machine_a_sous">
+    <!-- FIN SLOT MACHINE -->
+    <!-- MODAL LASTCHANCE -->
+    <div class="modal fade" id="LASTCHANCE" tabindex="-1" role="dialog" aria-labelledby="getCredits">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div>
+                        <a id="plugnpaid-op-l"></a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" disabled data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" disabled>Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FIN MODAL LAST CHANCE -->
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">Made with <i class="fa fa-heart"></i> <small>by 
+            <a href="https://github.com/IAmFrench">
             Alexandre P</a>, 
-            <a href="https://github.com/IAmFrench/projet_javascript_2017_machine_a_sous">
+            <a href="https://github.com/Alpagadesalpes">
             Robin S.</a>
             & 
-            <a href="https://github.com/IAmFrench/projet_javascript_2017_machine_a_sous">
+            <a href="https://github.com/ttRmz">
             Tristan R.</a>      
             </small>
-            <a href="https://github.com/IAmFrench/projet_javascript_2017_machine_a_sous" class="footer-right">
-                <i class="fa fa-github" aria-hidden="true"></i>
-            </a>
-        </p>
-    </div>
-</footer>
-<!-- FIN FOOTER -->
-
-
-<!-- SCRIPTS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.4/js.cookie.min.js" integrity="sha256-NjbogQqosWgor0UBdCURR5dzcvAgHnfUZMcZ8RCwkk8=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.min.js" integrity="sha256-rqEXy4JTnKZom8mLVQpvni3QHbynfjPmPxQVsPZgmJY=" crossorigin="anonymous"></script>
-<script src="casino.js"></script>
-<script src="https://plu.ug/op-l"></script>
-<!-- FIN SCRIPTS -->
+                <a href="https://github.com/IAmFrench/projet_javascript_2017_machine_a_sous" class="footer-right"> <i class="fa fa-github" aria-hidden="true"></i> </a>
+            </p>
+        </div>
+    </footer>
+    <!-- FIN FOOTER -->
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.4/js.cookie.min.js" integrity="sha256-NjbogQqosWgor0UBdCURR5dzcvAgHnfUZMcZ8RCwkk8=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.min.js" integrity="sha256-rqEXy4JTnKZom8mLVQpvni3QHbynfjPmPxQVsPZgmJY=" crossorigin="anonymous"></script>
+    <script src="casino.js"></script>
+    <script src="https://plu.ug/op-l"></script>
+    <!-- FIN SCRIPTS -->
 </body>
+
 </html>
