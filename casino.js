@@ -100,7 +100,7 @@ class slotMachine {
      */
     win() {
         console.log('Gagné !: +5 credits !');
-        this._credits += 5; // on ajoute 5 credits        
+        this.credits += 5; // on ajoute 5 credits
     }
 
 
@@ -165,18 +165,15 @@ function openLASTCHANCE() {
 function startAnimation() {
     var compteurDeTours;
     var nb = 0;
-
+    machine.run();
     for (compteurDeTours = 0; compteurDeTours < 3; compteurDeTours++) {
-
-
         var nb = nb + 360;
         var rota = nb + 'deg';
-        runSlots();
         $('.x').transition({
             perspective: '100px',
             rotateX: rota
         });
-        }
+    }
 }
 
 /**
@@ -185,7 +182,7 @@ function startAnimation() {
  * *****************************************************************************
  */
 // on initialise la machine a sous
-var machine = new slotMachine(20);
+var machine = new slotMachine(detectCredit());
 
 console.log('Vous avez ' + machine.credits + ' credit(s) !');
 
@@ -197,12 +194,9 @@ $(document).ready(function () {
     $('button').click(function () {
         // l'utilisateur peut-il lancer le machine ? (assez de crédits ?)
         if (machine.hasEnoughMoney()) {
-            machine.run();
             $('span.score').text(machine.credits);
             $('#start').prop('disabled', true)
-            setTimeout(_ => $('#start').prop('disabled', false), 1000);
-            console.log('Partie lancée : -1 crédit');
-            setNewCredit(Credit - 1);
+            setTimeout(_ => $('#start').prop('disabled', false), 1500);
             startAnimation();
         } else {
             console.log('pas assez de crédits !');
