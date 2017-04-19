@@ -116,7 +116,8 @@ class slotMachine {
             title: 'Résult',
             text: 'Lose! ^_^, but why not try again ;)',
             type: 'error',
-            styling: 'bootstrap3'
+            styling: 'bootstrap3',
+            delay: 2000
         });
     }
 }
@@ -238,8 +239,3 @@ $(document).ready(function () {
         console.log('Crédits restants:  ' + machine.credits);
     });
 });
-
-
-
-
-
