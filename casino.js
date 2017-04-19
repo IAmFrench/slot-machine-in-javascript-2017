@@ -89,9 +89,9 @@ class slotMachine {
      * et on afiche un message
      */
     win() {
-        console.log('Gagné !: +5 credits !');
+        console.log('Gagné !');
         this.credits += 5; // on ajoute 5 credits
-
+    swal("Good job!", "You won 5 credits!", "success")
         // et on affiche les nouveaux symboles
         $('.result').html(One);
         $('.result').append(' ' + Two);
@@ -215,7 +215,7 @@ $(document).ready(function () {
         if (machine.hasEnoughMoney()) {
             $('span.score').text(machine.credits);
             $('#start').prop('disabled', true)
-            setTimeout(_ => $('#start').prop('disabled', false), 1500);
+            setTimeout(_ => $('#start').prop('disabled', false), 0);
             startAnimation();
         } else {
             console.log('pas assez de crédits !');
