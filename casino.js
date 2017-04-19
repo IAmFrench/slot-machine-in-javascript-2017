@@ -5,7 +5,6 @@ class slotMachine {
 
     constructor(credits) {
         this._credits = credits || 20; // on definis les credits, sinon 20 par défaut
-        this.cases = []; // on stoke ici les valeurs des cases
         $('span.score').text(this.credits); // on affiche le score
     }
 
@@ -44,28 +43,28 @@ class slotMachine {
         ];
         
         // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Math/random/
-        One = Math.floor(Math.random() * 4) + 1;
-        Two = Math.floor(Math.random() * 4) + 1;
-        Three = Math.floor(Math.random() * 4) + 1;
-        Four = Math.floor(Math.random() * 4) + 1;
+        One = Math.floor(Math.random() * 4);
+        Two = Math.floor(Math.random() * 4);
+        Three = Math.floor(Math.random() * 4);
+        Four = Math.floor(Math.random() * 4);
         $('.result').html('YOU LOSE');
 
         // on remplace les symboles avec les nouveaux
-        $($('.x')[0]).html('<img src = "' + images[One - 1] + '">');
-        $($('.x')[1]).html('<img src = "' + images[Two - 1] + '">');
-        $($('.x')[2]).html('<img src = "' + images[Three - 1] + '">');
-        $($('.x')[3]).html('<img src = "' + images[Four - 1] + '">');
+        $($('.x')[0]).html('<img src = "' + images[One] + '">');
+        $($('.x')[1]).html('<img src = "' + images[Two] + '">');
+        $($('.x')[2]).html('<img src = "' + images[Three] + '">');
+        $($('.x')[3]).html('<img src = "' + images[Four] + '">');
 
         // on regarde si au moins l'un des symboles est different
         if (One !== Two || Two !== Three || Three!== Four) {
             this.lose();
-            return null;
+        } else {
+            // on ajoute les credits  l'utilisateur
+            this.win();
         }
 
-        // on ajoute les credits  l'utilisateur
-        this.win();
-        
-        return true;
+        // et on met à jours le score
+        $('span.score').text(machine.credits);
     }
 
 
@@ -89,7 +88,7 @@ class slotMachine {
      */
     win() {
         console.log('Won !');
-        console.log('+5 Credits')
+        console.log('+5 Credits');
         $('.result').html('YOU WIN');
         this.credits += 5; // on ajoute 5 credits
         // on affiche la notification
@@ -101,6 +100,8 @@ class slotMachine {
         });
         // idem mais en plein ecran
         swal("Good job!", "You won 5 credits!", "success");
+        // on ajoute cette partie au local storage
+        store.set((new Date).getTime(), {credits: this._credits, state: 'win'});
     }
 
 
@@ -119,6 +120,8 @@ class slotMachine {
             styling: 'bootstrap3',
             delay: 2000
         });
+        // on ajoute cette partie au local storage
+        store.set((new Date).getTime(), {credits: this._credits, state: 'lose'});
     }
 }
 
@@ -208,6 +211,7 @@ function startAnimation() {
     }
 }
 
+
 /**
  * *****************************************************************************
  * Début du programme (en haut ce sont les fonctions)
@@ -223,10 +227,9 @@ console.log('Vous avez ' + machine.credits + ' credit(s) !');
  * On écoute le clic sur le bouton
  */
 $(document).ready(function () {
-    $('button').click(function () {
+    $('button#start').click(function () {
         // l'utilisateur peut-il lancer le machine ? (assez de crédits ?)
         if (machine.hasEnoughMoney()) {
-            $('span.score').text(machine.credits);
             $('#start').prop('disabled', true)
             setTimeout(_ => $('#start').prop('disabled', false), 1500);
             startAnimation();
@@ -238,4 +241,29 @@ $(document).ready(function () {
         }
         console.log('Crédits restants:  ' + machine.credits);
     });
+
+    // quand on clique sur le bouton pour afficher l'historique
+    $('button.view-history').click(function () {
+        // on remplie le tablea de la modal
+        var table = $('table.table');
+        if (localStorage.length !== 0) {
+            // il y a un historique
+            table.html('<thead> <tr> <th>Date</th> <th>Credits</th> <th>Win/Lose</th> </tr> </thead>');
+            table.append('<tbody></tbody>');
+            var tbody = $('tbody');
+            for (var key in localStorage){
+                console.log(typeof(key));
+                d = new Date(Number(key));
+                var date = d.toLocaleDateString("fr", {weekday: "long", year: "numeric", month: "long", day: "numeric", hour: '2-digit', minute:'2-digit', second: '2-digit'});
+                var credit = JSON.parse(localStorage[key]).credits;
+                var resultat = JSON.parse(localStorage[key]).state;
+                tbody.append("<tr> <th>" + date + "</th> <th>" + credit + "</th> <th>" + resultat + "</th> </tr>");
+            }
+        }
+
+        // et on ouvre la modal
+        $('#score').modal('show');
+    });
 });
+
+
