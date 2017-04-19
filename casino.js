@@ -64,9 +64,8 @@ class slotMachine {
 
         // on ajoute les credits  l'utilisateur
         this.win();
-
-        // et enfin on affiche 'you win'
-        return $('.result').html('YOU WIN');
+        
+        return true;
     }
 
 
@@ -89,14 +88,19 @@ class slotMachine {
      * et on afiche un message
      */
     win() {
-        console.log('Gagné !: +5 credits !');
+        console.log('Won !');
+        console.log('+5 Credits')
+        $('.result').html('YOU WIN');
         this.credits += 5; // on ajoute 5 credits
-
-        // et on affiche les nouveaux symboles
-        $('.result').html(One);
-        $('.result').append(' ' + Two);
-        $('.result').append(' ' + Three);
-        $('.result').append(' ' + Four);
+        // on affiche la notification
+        new PNotify({
+            title: 'Résult',
+            text: 'Look at that ! You won 5 credits ! ^_^',
+            type: 'success',
+            styling: 'bootstrap3'
+        });
+        // idem mais en plein ecran
+        swal("Good job!", "You won 5 credits!", "success");
     }
 
 
@@ -106,6 +110,15 @@ class slotMachine {
      */
     lose() {
         console.log('Perdu !');
+
+        // on affiche la notification
+        new PNotify({
+            title: 'Résult',
+            text: 'Lose! ^_^, but why not try again ;)',
+            type: 'error',
+            styling: 'bootstrap3',
+            delay: 2000
+        });
     }
 }
 
@@ -226,8 +239,3 @@ $(document).ready(function () {
         console.log('Crédits restants:  ' + machine.credits);
     });
 });
-
-
-
-
-
