@@ -259,6 +259,8 @@ $(document).ready(function () {
                 var resultat = JSON.parse(localStorage[key]).state;
                 tbody.append("<tr> <th>" + date + "</th> <th>" + credit + "</th> <th>" + resultat + "</th> </tr>");
             }
+            // et on inverse l'ordre
+            tbody.html($('tr',tbody).get().reverse());
         }
 
         // et on ouvre la modal
