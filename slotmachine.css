@@ -60,3 +60,11 @@ footer {
     -ms-flex-align: center;
     align-items: center
 }
+
+.x {
+    margin: 5px;
+}
+
+.x img {
+    border: 2px solid black;
+}
