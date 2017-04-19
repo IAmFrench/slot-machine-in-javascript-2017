@@ -92,8 +92,15 @@ class slotMachine {
         console.log('+5 Credits')
         $('.result').html('YOU WIN');
         this.credits += 5; // on ajoute 5 credits
+        // on affiche la notification
+        new PNotify({
+            title: 'Résult',
+            text: 'Look at that ! You won 5 credits ! ^_^',
+            type: 'success',
+            styling: 'bootstrap3'
+        });
+        // idem mais en plein ecran
         swal("Good job!", "You won 5 credits!", "success");
-        
     }
 
 
@@ -103,6 +110,14 @@ class slotMachine {
      */
     lose() {
         console.log('Perdu !');
+
+        // on affiche la notification
+        new PNotify({
+            title: 'Résult',
+            text: 'Lose! ^_^, but why not try again ;)',
+            type: 'error',
+            styling: 'bootstrap3'
+        });
     }
 }
 
