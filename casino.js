@@ -5,7 +5,6 @@ class slotMachine {
 
     constructor(credits) {
         this._credits = credits || 20; // on definis les credits, sinon 20 par défaut
-        this.cases = []; // on stoke ici les valeurs des cases
         $('span.score').text(this.credits); // on affiche le score
     }
 
@@ -59,13 +58,13 @@ class slotMachine {
         // on regarde si au moins l'un des symboles est different
         if (One !== Two || Two !== Three || Three!== Four) {
             this.lose();
-            return null;
+        } else {
+            // on ajoute les credits  l'utilisateur
+            this.win();
         }
 
-        // on ajoute les credits  l'utilisateur
-        this.win();
-        
-        return true;
+        // et on met à jours le score
+        $('span.score').text(machine.credits);
     }
 
 
@@ -89,7 +88,7 @@ class slotMachine {
      */
     win() {
         console.log('Won !');
-        console.log('+5 Credits')
+        console.log('+5 Credits');
         $('.result').html('YOU WIN');
         this.credits += 5; // on ajoute 5 credits
         // on affiche la notification
@@ -101,6 +100,8 @@ class slotMachine {
         });
         // idem mais en plein ecran
         swal("Good job!", "You won 5 credits!", "success");
+        // on ajoute cette partie au local storage
+        store.set((new Date).getTime(), {credits: this._credits, state: 'win'});
     }
 
 
@@ -119,6 +120,8 @@ class slotMachine {
             styling: 'bootstrap3',
             delay: 2000
         });
+        // on ajoute cette partie au local storage
+        store.set((new Date).getTime(), {credits: this._credits, state: 'lose'});
     }
 }
 
@@ -208,6 +211,7 @@ function startAnimation() {
     }
 }
 
+
 /**
  * *****************************************************************************
  * Début du programme (en haut ce sont les fonctions)
@@ -223,10 +227,9 @@ console.log('Vous avez ' + machine.credits + ' credit(s) !');
  * On écoute le clic sur le bouton
  */
 $(document).ready(function () {
-    $('button').click(function () {
+    $('button#start').click(function () {
         // l'utilisateur peut-il lancer le machine ? (assez de crédits ?)
         if (machine.hasEnoughMoney()) {
-            $('span.score').text(machine.credits);
             $('#start').prop('disabled', true)
             setTimeout(_ => $('#start').prop('disabled', false), 1500);
             startAnimation();
@@ -238,4 +241,21 @@ $(document).ready(function () {
         }
         console.log('Crédits restants:  ' + machine.credits);
     });
+
+    // quand on clique sur le bouton pour afficher l'historique
+    $('button.view-history').click(function () {
+        // on remplie le tablea de la modal
+        for (var key in localStorage){
+            console.log(key, localStorage[key]);
+        }
+
+
+        // et on ouvre la modal
+        $('#score').modal({
+        backdrop: 'static',
+        keyboard: false
+    }); // on ouvre la modal
+    });
 });
+
+

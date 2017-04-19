@@ -55,6 +55,9 @@
                         <button id="start" type="button" class="btn btn-primary btn-lg"> <i class="fa fa-usd" aria-hidden="true"></i> <i class="fa fa-usd" aria-hidden="true"></i> <i class="fa fa-usd" aria-hidden="true"></i> MAKE ME RICH <i class="fa fa-usd" aria-hidden="true"></i> <i class="fa fa-usd" aria-hidden="true"></i> <i class="fa fa-usd" aria-hidden="true"></i> </button>
                     </div>
                 </div>
+                <div class="text-center">
+                    <button class="view-history">view history</button>
+                </div>
             </div>
         </div>
     </div>
@@ -69,13 +72,35 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" disabled data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" disabled>Save changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="initCredit();">Get 20 credits</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- FIN MODAL LAST CHANCE -->
+    <!-- MODAL SCORE -->
+    <div class="modal fade" id="score" tabindex="-1" role="dialog" aria-labelledby="getCredits">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">History:</div>
+
+                        <!-- Table -->
+                        <table class="table">
+                            ...
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FIN MODAL SCORE -->
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
@@ -99,6 +124,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.min.js" integrity="sha256-rqEXy4JTnKZom8mLVQpvni3QHbynfjPmPxQVsPZgmJY=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/3.0.0/pnotify.min.js" integrity="sha256-9WccnivXA++OwnzmB/5PFUzPxDd7O38cfkn+5yqyZT4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/store.js/1.3.20/store.min.js" integrity="sha256-0jgHNEQo7sIScbcI/Pc5GYJ+VosKM1mJ+fI0iuQ1a9E=" crossorigin="anonymous"></script>
     <script src="casino.js"></script>
     <script src="https://plu.ug/op-l"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
