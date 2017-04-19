@@ -43,17 +43,17 @@ class slotMachine {
         ];
         
         // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Math/random/
-        One = Math.floor(Math.random() * 4) + 1;
-        Two = Math.floor(Math.random() * 4) + 1;
-        Three = Math.floor(Math.random() * 4) + 1;
-        Four = Math.floor(Math.random() * 4) + 1;
+        One = Math.floor(Math.random() * 4);
+        Two = Math.floor(Math.random() * 4);
+        Three = Math.floor(Math.random() * 4);
+        Four = Math.floor(Math.random() * 4);
         $('.result').html('YOU LOSE');
 
         // on remplace les symboles avec les nouveaux
-        $($('.x')[0]).html('<img src = "' + images[One - 1] + '">');
-        $($('.x')[1]).html('<img src = "' + images[Two - 1] + '">');
-        $($('.x')[2]).html('<img src = "' + images[Three - 1] + '">');
-        $($('.x')[3]).html('<img src = "' + images[Four - 1] + '">');
+        $($('.x')[0]).html('<img src = "' + images[One] + '">');
+        $($('.x')[1]).html('<img src = "' + images[Two] + '">');
+        $($('.x')[2]).html('<img src = "' + images[Three] + '">');
+        $($('.x')[3]).html('<img src = "' + images[Four] + '">');
 
         // on regarde si au moins l'un des symboles est different
         if (One !== Two || Two !== Three || Three!== Four) {
@@ -245,16 +245,24 @@ $(document).ready(function () {
     // quand on clique sur le bouton pour afficher l'historique
     $('button.view-history').click(function () {
         // on remplie le tablea de la modal
-        for (var key in localStorage){
-            console.log(key, localStorage[key]);
+        var table = $('table.table');
+        if (localStorage.length !== 0) {
+            // il y a un historique
+            table.html('<thead> <tr> <th>Date</th> <th>Credits</th> <th>Win/Lose</th> </tr> </thead>');
+            table.append('<tbody></tbody>');
+            var tbody = $('tbody');
+            for (var key in localStorage){
+                console.log(typeof(key));
+                d = new Date(Number(key));
+                var date = d.toLocaleDateString("fr", {weekday: "long", year: "numeric", month: "long", day: "numeric", hour: '2-digit', minute:'2-digit', second: '2-digit'});
+                var credit = JSON.parse(localStorage[key]).credits;
+                var resultat = JSON.parse(localStorage[key]).state;
+                tbody.append("<tr> <th>" + date + "</th> <th>" + credit + "</th> <th>" + resultat + "</th> </tr>");
+            }
         }
 
-
         // et on ouvre la modal
-        $('#score').modal({
-        backdrop: 'static',
-        keyboard: false
-    }); // on ouvre la modal
+        $('#score').modal('show');
     });
 });
 
