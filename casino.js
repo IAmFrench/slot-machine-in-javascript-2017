@@ -261,6 +261,10 @@ $(document).ready(function () {
             }
             // et on inverse l'ordre
             tbody.html($('tr',tbody).get().reverse());
+
+            // et on ajoute la pagination
+            console.log('pagination');
+            table.DataTable();
         }
 
         // et on ouvre la modal

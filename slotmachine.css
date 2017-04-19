@@ -68,3 +68,12 @@ footer {
 .x img {
     border: 2px solid black;
 }
+
+.dataTables_wrapper {
+    margin-top: 1%;
+    margin-right: 1%;
+    margin-left: 1%;
+}
+.modal-body {
+    padding-bottom: 0;
+}
