@@ -97,6 +97,14 @@ class slotMachine {
         $('.result').append(' ' + Two);
         $('.result').append(' ' + Three);
         $('.result').append(' ' + Four);
+
+        // on affiche la notification
+        new PNotify({
+            title: 'Résult',
+            text: 'Look at that ! You won 5 credits ! ^_^',
+            type: 'success',
+            styling: 'bootstrap3'
+        });
     }
 
 
@@ -106,6 +114,16 @@ class slotMachine {
      */
     lose() {
         console.log('Perdu !');
+
+        /**
+         * On affiche une petite notification
+         */
+        new PNotify({
+            title: 'Résult',
+            text: 'Lose! ^_^, but why not try again ;)',
+            type: 'error',
+            styling: 'bootstrap3'
+        });
     }
 }
 
