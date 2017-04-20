@@ -3,6 +3,11 @@
  */
 class slotMachine {
 
+    /**
+     * On instancie une machine a sous avec le nombre de crédits donnés
+     * et on les affiches directement sur la page
+     * @param {number} credits 
+     */
     constructor(credits) {
         this._credits = credits || 20; // on definis les credits, sinon 20 par défaut
         $('span.score').text(this.credits); // on affiche le score
@@ -17,19 +22,25 @@ class slotMachine {
         return this._credits;
     }
 
+
+    /**
+     * Permet de définir une valeure pour les credits
+     * Enregistre directement cette valeure dans les cookies
+     */
     set credits(value) {
         this._credits = value; // on définis la nouvelle valeure
         Cookies.set('Credit', value, { expires: 7, path: '' }); // on met à jours le cookie
         return this._credits;
     }
 
+
     /**
      * Pour lancer la machine
+     * Effectue le calcul pour déterminer les nouveaux symboles
      */
     run() {
         console.log('Partie lancée: -1 crédit');
         this.credits -= 1; // on enlève 1 crédit
-
 
         var One;
         var Two;
@@ -42,6 +53,7 @@ class slotMachine {
             "https://upload.wikimedia.org/wikipedia/commons/8/8a/SuitClubs.svg"
         ];
         
+        // on détermine nos nouveaux sumboles
         // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Math/random/
         One = Math.floor(Math.random() * 4);
         Two = Math.floor(Math.random() * 4);
@@ -59,17 +71,17 @@ class slotMachine {
         if (One !== Two || Two !== Three || Three!== Four) {
             this.lose();
         } else {
-            // on ajoute les credits  l'utilisateur
+            // si ce n'est pas le cas, c'est que TOUT les symboles sont identiques, donc partie gagnée
             this.win();
         }
 
-        // et on met à jours le score
+        // et on met à jours le score visuellement
         $('span.score').text(machine.credits);
     }
 
 
     /**
-     * Permet de vérifier si l'utilisateur a assez de sous ( sup à 0)
+     * Permet de vérifier si l'utilisateur a assez de sous ( > 0)
      */
     hasEnoughMoney() {
         if(this._credits <= 0) {
@@ -82,32 +94,31 @@ class slotMachine {
 
 
     /**
-     * SI l'utilisateur gagne
-     * On lui ajoute 5 credits
-     * et on afiche un message
+     * Définis le comportement quand l'utilsiateur a gagné la partie
      */
     win() {
         console.log('Won !');
         console.log('+5 Credits');
         $('.result').html('YOU WIN');
         this.credits += 5; // on ajoute 5 credits
-        // on affiche la notification
+
+        // on affiche la notification (celle en haut à droite)
         new PNotify({
             title: 'Résult',
             text: 'Look at that ! You won 5 credits ! ^_^',
             type: 'success',
             styling: 'bootstrap3'
         });
-        // idem mais en plein ecran
+        // on affiche la notification (celle en plein écran - modal)
         swal("Good job!", "You won 5 credits!", "success");
-        // on ajoute cette partie au local storage
+
+        // on ajoute cette partie au localstorage 
         store.set((new Date).getTime(), {credits: this._credits, state: 'win'});
     }
 
 
     /**
-     * Si l'utilisateur perd
-     * On ne fais rien, on affiche simplement un message d'erreur
+     * Définis le comportement quand l'utilsiateur a prdu la partie
      */
     lose() {
         console.log('Perdu !');
@@ -120,6 +131,7 @@ class slotMachine {
             styling: 'bootstrap3',
             delay: 2000
         });
+
         // on ajoute cette partie au local storage
         store.set((new Date).getTime(), {credits: this._credits, state: 'lose'});
     }
@@ -134,7 +146,7 @@ class slotMachine {
  */
 function initCredit() {
     Cookies.set('Credit', '20', { expires: 7, path: '' });
-    location.reload(true);
+    location.reload(true); // on recharge la page
     return 'Vous avez maintenant ' + Cookies.get('Credit') + ' credits!';
 
 }
@@ -150,11 +162,13 @@ function detectCredit() {
     var credit = Cookies.get('Credit');
     console.log(Cookies.get('Credit'));
 
+    // si, pas de cookie définis
     if (typeof(credit) == 'undefined' || credit == 'NaN') {
         console.log('Cookie vide ou malformé !', Cookies.get('Credit'));
+        
         // on initialise donc le cookie
-        credit = 20;//getCredit();
-        initCredit();
+        initCredit(); // provoque une actualisation de la page, donc on s'arrete là
+        return 0;
     }
 
     // sinon c'est que c'est bon
@@ -197,6 +211,10 @@ function openLASTCHANCE() {
     }, 500);
 }
 
+
+/**
+ * Permet de démarrer l'animation sur les symboles
+ */
 function startAnimation() {
     var compteurDeTours;
     var nb = 0;
@@ -226,49 +244,68 @@ console.log('Vous avez ' + machine.credits + ' credit(s) !');
 /**
  * On écoute le clic sur le bouton
  */
+var td; // Datatable
+var table_opened; // pour savoir si on a déjà ouvert la modal
 $(document).ready(function () {
     $('button#start').click(function () {
         // l'utilisateur peut-il lancer le machine ? (assez de crédits ?)
         if (machine.hasEnoughMoney()) {
-            $('#start').prop('disabled', true)
-            setTimeout(_ => $('#start').prop('disabled', false), 1500);
-            startAnimation();
+            $('#start').prop('disabled', true); // on interdit le double clic (en désactivant le bouton)
+            setTimeout(_ => $('#start').prop('disabled', false), 1500); // mais que pendant le temps de l'animation, soit 1.5s
+            startAnimation(); // et on lance l'animation
         } else {
             console.log('pas assez de crédits !');
-            // afficher ici un message d'erreur
-            // mais pour le moment on se contente de réinitialiser le nombre de crédits
-            openLASTCHANCE();
+            openLASTCHANCE(); // on ouvre la modal $$$
         }
+
+        // on indique à la fin du tour le nombre de crédits restants
         console.log('Crédits restants:  ' + machine.credits);
     });
 
     // quand on clique sur le bouton pour afficher l'historique
     $('button.view-history').click(function () {
-        // on remplie le tablea de la modal
+        // on remplie le tableau dans la modal
         var table = $('table.table');
         if (localStorage.length !== 0) {
             // il y a un historique
-            table.html('<thead> <tr> <th>Date</th> <th>Credits</th> <th>Win/Lose</th> </tr> </thead>');
-            table.append('<tbody></tbody>');
+            // on ajoute la structure
+            table.html('<thead> <tr> <th>Date</th> <th>Credits</th> <th>Win/Lose</th> </tr> </thead> <tbody></tbody>');
+
+            // et on rempli le tableau
             var tbody = $('tbody');
             for (var key in localStorage){
-                console.log(typeof(key));
                 d = new Date(Number(key));
                 var date = d.toLocaleDateString("fr", {weekday: "long", year: "numeric", month: "long", day: "numeric", hour: '2-digit', minute:'2-digit', second: '2-digit'});
                 var credit = JSON.parse(localStorage[key]).credits;
                 var resultat = JSON.parse(localStorage[key]).state;
                 tbody.append("<tr> <th>" + date + "</th> <th>" + credit + "</th> <th>" + resultat + "</th> </tr>");
             }
-            // et on inverse l'ordre
-            tbody.html($('tr',tbody).get().reverse());
 
-            // et on ajoute la pagination
-            console.log('pagination');
-            table.DataTable();
+            // On ajoute la pagination
+            if (table_opened) {
+                console.log("On détruit l'ancienne pagination");
+                td.destroy(); // on détruit l'ancienne pagination
+            }
+            console.log('Ajout de la pagination');
+
+            // on regarde si on est une un affichage de type "mobile", comprendre ici la hauteur de l'écran est petite
+            if ($(window).height() < 690) {
+                pageLength = 5;
+            } else {
+                pageLength = 10;
+            }
+
+            td = table.DataTable({
+                "searching": false,
+                "order": [[ 0, 'desc' ]],
+                "pageLength": pageLength
+            }); // et on trie
+            table_opened = true; // on indique que l'on viens d'initialiser notre pagination
         }
 
-        // et on ouvre la modal
+        // Puis on ouvre la modal
         $('#score').modal('show');
+        return "History opened";
     });
 });
 
