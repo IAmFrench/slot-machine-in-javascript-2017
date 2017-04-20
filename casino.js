@@ -226,6 +226,8 @@ console.log('Vous avez ' + machine.credits + ' credit(s) !');
 /**
  * On écoute le clic sur le bouton
  */
+var td; // Datatable
+var table_opened; // pour savoir si on a déjà ouvert la modal
 $(document).ready(function () {
     $('button#start').click(function () {
         // l'utilisateur peut-il lancer le machine ? (assez de crédits ?)
@@ -252,7 +254,6 @@ $(document).ready(function () {
             table.append('<tbody></tbody>');
             var tbody = $('tbody');
             for (var key in localStorage){
-                console.log(typeof(key));
                 d = new Date(Number(key));
                 var date = d.toLocaleDateString("fr", {weekday: "long", year: "numeric", month: "long", day: "numeric", hour: '2-digit', minute:'2-digit', second: '2-digit'});
                 var credit = JSON.parse(localStorage[key]).credits;
@@ -260,11 +261,26 @@ $(document).ready(function () {
                 tbody.append("<tr> <th>" + date + "</th> <th>" + credit + "</th> <th>" + resultat + "</th> </tr>");
             }
             // et on inverse l'ordre
-            tbody.html($('tr',tbody).get().reverse());
+            // tbody.html($('tr',tbody).get().reverse());
 
             // et on ajoute la pagination
-            console.log('pagination');
-            table.DataTable();
+            if (table_opened) {
+                console.log("On détruit l'ancienne pagination");
+                td.destroy(); // on détruit l'ancienne pagination
+            }
+            console.log('Ajout de la pagination');
+            // on regarde si on est une un affichage de type "mobile", comprendre ici la hauteur de l'écran est petite
+            if ($(window).height() < 690) {
+                pageLength = 5;
+            } else {
+                pageLength = 10;
+            }
+            td = table.DataTable({
+                "searching": false,
+                "order": [[ 0, 'desc' ]],
+                "pageLength": pageLength
+            }); // et on trie
+            table_opened = true; // on indique que l'on viens d'initialiser notre pagination
         }
 
         // et on ouvre la modal
