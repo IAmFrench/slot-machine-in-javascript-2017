@@ -1,5 +1,5 @@
 # projet_javascript_2017_machine_a_sous
-
+Demo: <https://projet-javascript.ga/>
 ## Licence
 `projet_javascript_2017_machine_a_sous` (c) by Alexandre Parès, Robin Silvert 
 and Tristan Ramirez
