@@ -14,7 +14,10 @@ You should have received a copy of the license along with this
 work. If not, see <http://creativecommons.org/licenses/by/4.0/>.
 
 ## Installation
-Ne pas ouvrir `index.html`, en effet le protocole utilisé sera alors `file:///` et 
+Cloner le repo `https://github.com/IAmFrench/projet_javascript_2017_machine_a_sous.git`
+
+
+Note: ne pas ouvrir directement `index.html`, en effet le protocole utilisé sera alors `file:///` et 
 ce dernier ne permet pas l'utilisation des cookies, il est donc impossible de lire le score
 
 Il est préférable d'utiliser un serveur web.
