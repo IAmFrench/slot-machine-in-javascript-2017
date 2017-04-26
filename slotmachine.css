@@ -12,12 +12,13 @@ img {
     -ms-flex-pack: center;
     justify-content: center;
 }
-
+html, body {
+    /** bug horizontal de la barre de défilement;(  **/
+    overflow-x: hidden;
+}
 body {
     /** à cause de la navbar fixe **/
     padding-top: 70px;
-    /** bug horizontal de la barre de défilement;(  **/
-    overflow-x: hidden;
 }
 
 footer {
@@ -76,4 +77,20 @@ footer {
 }
 .modal-body {
     padding-bottom: 0;
+}
+
+@media all and (max-width: 425px){
+    .container .text-muted {
+        margin: 10px 0;
+    }
+    p.text-muted {
+        width: 270px;
+        margin-top: 10px;
+    }
+    .footer-right {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        font-size: 2em;
+    }
 }
