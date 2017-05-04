@@ -288,12 +288,23 @@ $(document).ready(function () {
             }
             console.log('Ajout de la pagination');
 
-            // on regarde si on est une un affichage de type "mobile", comprendre ici la hauteur de l'écran est petite
-            if ($(window).height() < 690) {
-                pageLength = 5;
-            } else {
-                pageLength = 10;
+            // On adapte le nombre d'éléments affichés selon la hauteur d'une ligne
+            switch (true) {
+                case ($(window).width() < 335):
+                    pageLength = Math.floor( ($(window).height() - 330) / 98)
+                    break;
+                case ($(window).width() < 372):
+                    pageLength = Math.floor( ($(window).height() - 340) / 78)
+                    break;
+                case ($(window).width() < 480):
+                    pageLength = Math.floor( ($(window).height() - 300) / 58)
+                    break;
+                default:
+                    pageLength = Math.floor( ($(window).height() - 300) / 38)
+                    break;
             }
+            
+            console.log('On affiche ' + pageLength + ' éléments par page')
 
             td = table.DataTable({
                 "searching": false,
@@ -306,6 +317,53 @@ $(document).ready(function () {
         // Puis on ouvre la modal
         $('#score').modal('show');
         return "History opened";
+    });
+
+
+    
+
+    function setFooter() {
+        // on design le footer
+        if ($(document).height() == $(window).height()) {
+
+
+            // on regarde si avec 60px de plus la taille du document reste supérieu
+            // on peut "coller le footer au pied du document
+            if (!$('footer').hasClass('footer_abs')) {
+                $('footer').toggleClass('footer_abs')
+            }
+            if (!$('.git-link').hasClass('footer-right')) {
+                $('.git-link').toggleClass('footer-right')
+            }
+            if ($('.git-link').hasClass('footer-right-std')) {
+                $('.git-link').toggleClass('footer-right-std')
+            }
+
+            console.log('footer absolute')
+        } else {
+            console.log('footer document')
+            if (!$('footer').hasClass('footer_content')) {
+                $('footer').toggleClass('footer_content')
+            }
+            if ($('footer').hasClass('footer_abs')) {
+                $('footer').toggleClass('footer_abs')
+            }
+            if (!$('.git-link').hasClass('footer-right-std')) {
+                $('.git-link').toggleClass('footer-right-std')
+            }
+            if ($('.git-link').hasClass('footer-right')) {
+                $('.git-link').toggleClass('footer-right')
+            }
+        }
+    }
+
+    // on définis le footer dès que la page est chargée
+    setFooter()
+
+    // on écoute si la fenetre est resizé
+    $( window ).resize(function() {
+        console.log('resize');
+        setFooter()
     });
 });
 

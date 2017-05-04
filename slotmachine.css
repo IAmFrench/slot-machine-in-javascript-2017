@@ -20,9 +20,10 @@ body {
     /** à cause de la navbar fixe **/
     padding-top: 70px;
 }
-
-footer {
+.nabbar {
     position: absolute;
+}
+footer {
     bottom: 0;
     width: 100%;
     height: 60px;
@@ -47,7 +48,7 @@ footer {
 
 .footer-right {
     float: right;
-    margin-right: 20px;
+    margin-right: 40px;
 }
 
 .page-header.center {
@@ -78,8 +79,13 @@ footer {
 .modal-body {
     padding-bottom: 0;
 }
+.footer-right-std {
+    float: right;
+}
 
-@media all and (max-width: 425px){
+
+
+@media all and (max-width: 320px){
     .container .text-muted {
         margin: 10px 0;
     }
@@ -89,12 +95,88 @@ footer {
     }
     .footer-right {
         position: absolute;
-        right: 10px;
-        bottom: 10px;
+        right: -53px;
+        bottom: 0px;
+        font-size: 2em;
+    }
+    .footer-right-std {
+        position: absolute;
+        right: -17px;
+        bottom: 0px;
         font-size: 2em;
     }
 }
-@media (max-width: 768px) {
+
+
+@media all and (min-width: 321px) and (max-width: 375px){
+    .container .text-muted {
+        margin: 10px 0;
+    }
+    p.text-muted {
+        width: 270px;
+        margin-top: 10px;
+    }
+    .footer-right {
+        position: absolute;
+        right: -71px;
+        bottom: 0px;
+        font-size: 2em;
+    }
+    .footer-right-std {
+        position: absolute;
+        right: -29px;
+        bottom: 0px;
+        font-size: 2em;
+    }
+}
+
+
+
+@media all and (min-width: 376px) and (max-width: 425px){
+    .container .text-muted {
+        margin: 10px 0;
+    }
+    p.text-muted {
+        width: 270px;
+        margin-top: 10px;
+    }
+    .footer-right {
+        position: absolute;
+        right: -110px;
+        bottom: 0px;
+        font-size: 2em;
+    }
+    .footer-right-std {
+        position: absolute;
+        right: -86px;
+        bottom: 0px;
+        font-size: 2em;
+    }
+}
+
+@media all and (min-width: 426px) and (max-width: 454px){
+    .container .text-muted {
+        margin: 10px 0;
+    }
+    p.text-muted {
+        width: 270px;
+        margin-top: 10px;
+    }
+    .footer-right {
+        position: absolute;
+        right: -154px;
+        bottom: 0px;
+        font-size: 2em;
+    }
+    .footer-right-std {
+        position: absolute;
+        right: -134px;
+        bottom: 0px;
+        font-size: 2em;
+    }
+}
+
+@media all and (max-width: 768px) {
     .navbar-text {
         display: none;
     }
@@ -103,4 +185,14 @@ footer {
         float: right;
         margin-right: 15px;
     }
+}
+.footer_abs {
+    position: absolute;
+}
+.view-history {
+    margin-bottom: 60px;
+}
+
+p.text-muted {
+    position: relative;
 }
