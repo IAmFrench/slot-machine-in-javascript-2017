@@ -94,3 +94,13 @@ footer {
         font-size: 2em;
     }
 }
+@media (max-width: 768px) {
+    .navbar-text {
+        display: none;
+    }
+    .navbar-right {
+        display: block;
+        float: right;
+        margin-right: 15px;
+    }
+}
