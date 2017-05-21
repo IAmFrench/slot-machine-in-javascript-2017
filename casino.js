@@ -322,43 +322,6 @@ $(document).ready(function () {
 
     
 
-    function setFooter() {
-        // on design le footer
-        if ($(document).height() == $(window).height()) {
-
-
-            // on regarde si avec 60px de plus la taille du document reste supérieu
-            // on peut "coller le footer au pied du document
-            if (!$('footer').hasClass('footer_abs')) {
-                $('footer').toggleClass('footer_abs')
-            }
-            if (!$('.git-link').hasClass('footer-right')) {
-                $('.git-link').toggleClass('footer-right')
-            }
-            if ($('.git-link').hasClass('footer-right-std')) {
-                $('.git-link').toggleClass('footer-right-std')
-            }
-
-            console.log('footer absolute')
-        } else {
-            console.log('footer document')
-            if (!$('footer').hasClass('footer_content')) {
-                $('footer').toggleClass('footer_content')
-            }
-            if ($('footer').hasClass('footer_abs')) {
-                $('footer').toggleClass('footer_abs')
-            }
-            if (!$('.git-link').hasClass('footer-right-std')) {
-                $('.git-link').toggleClass('footer-right-std')
-            }
-            if ($('.git-link').hasClass('footer-right')) {
-                $('.git-link').toggleClass('footer-right')
-            }
-        }
-    }
-
-    // on définis le footer dès que la page est chargée
-    setFooter()
 
     // on écoute si la fenetre est resizé
     $( window ).resize(function() {
@@ -366,5 +329,44 @@ $(document).ready(function () {
         setFooter()
     });
 });
+
+
+function setFooter() {
+    // on design le footer
+    if ($(document).height() == $(window).height()) {
+
+
+        // on regarde si avec 60px de plus la taille du document reste supérieu
+        // on peut "coller le footer au pied du document
+        if (!$('footer').hasClass('footer_abs')) {
+            $('footer').toggleClass('footer_abs')
+        }
+        if (!$('.git-link').hasClass('footer-right')) {
+            $('.git-link').toggleClass('footer-right')
+        }
+        if ($('.git-link').hasClass('footer-right-std')) {
+            $('.git-link').toggleClass('footer-right-std')
+        }
+
+        console.log('footer absolute')
+    } else {
+        console.log('footer document')
+        if (!$('footer').hasClass('footer_content')) {
+            $('footer').toggleClass('footer_content')
+        }
+        if ($('footer').hasClass('footer_abs')) {
+            $('footer').toggleClass('footer_abs')
+        }
+        if (!$('.git-link').hasClass('footer-right-std')) {
+            $('.git-link').toggleClass('footer-right-std')
+        }
+        if ($('.git-link').hasClass('footer-right')) {
+            $('.git-link').toggleClass('footer-right')
+        }
+    }
+}
+
+// on définis le footer pendant que la page charge
+setFooter()
 
 
