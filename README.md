@@ -1,5 +1,5 @@
 # projet_javascript_2017_machine_a_sous
-Demo: <https://projet-javascript.ga/>
+Demo: <https://iamfrench.github.io/slot-machine-in-javascript-2017/>
 
 keywords: machine-a-sous,slotmachine,projet-javascript
 
